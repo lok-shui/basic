@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 链接：https://mp.weixin.qq.com/s?src=11&timestamp=1627436779&ver=3217&signature=u-gY2GVNxBdsxIpwmAJzx0*1-4bb1xao32VhP3YFGIRna-9NIs7DWCWDaC61VmDYyYxY0kllbgJmiliDd6uZa46N*GZ4paIlJdT8N01oC313T9V5ccGRIBqUWazJNQ0A&new=1
+    // var全局作用域，所以在for循环中声明的 i 就是一个全局变量，全局可用，每一次给 i 赋值都是给全局变量 i 赋值。
+    for(var i=0; i<5; i++){
+      setTimeout( () => {
+        console.log('i',i)
+      },1000)
+    }
+   
+
+    // 方法1 在函数内部参数 i 就变成了函数内的局部作用域
+    for(var j=0; j<5; j++){
+      varFun(j)
+    }
+    function varFun(j){
+      setTimeout(() =>{
+        console.log('j', j)
+      })
+    }
+    // 方法1 立即执行函数
+    for(var x=0; x<5; x++){
+      (function(x){
+        setTimeout(() =>{
+          console.log('x', x)
+        })
+      })(x)
+    }
+    // 方法3 let
+    for(let i=0; i<5; i++){
+      setTimeout( () => {
+        console.log('i',i)
+      },1000)
+    }
+
+    // var name = 'world';
+    // (function(){
+    //   if(typeof name === 'undefined'){
+    //     var name = 'Jimi';
+    //     console.log('hello', name)
+    //   } else {
+    //     console.log('hello',name)
+    //   }
+    // })()
+    var name = 'world';
+    (function(){
+      if(typeof name === 'undefined'){
+        let name = 'Jimi';
+        console.log('hello', name)
+      } else {
+        console.log('hello',name)
+      }
+    })()
+
+    // 总结：
+    // var和let的作用域不同。
+    // let不能在定义之前访问该变量，但是var可以
+    // let不能被重新定义，但是var是可以的
+    // let var const 的三者区别：https://zhuanlan.zhihu.com/p/113025497
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>對象</title>
+</head>
+<body>
+  <script>
+    // 方法1：字面量 ======================
+    var obj = {};
+    obj[1] = 1;
+    obj['1'] = 2;
+    obj[{}] = true;
+    obj[{x:1}] = true;
+    console.log('obj對象',obj) //  {1: 2, [object Object]: true}
+
+    // 方法2：new 原型鏈 ==================
+    function first(){};
+    first.prototype.z = 5;
+    const copy = new first();
+    copy.x = 1;
+    copy.y = 2;
+    console.log('copy', copy) //  {x: 1, y: 2}
+    // [[Prototype]]: Object
+    //   z: 5
+    //   constructor: ƒ first()
+    //   [[Prototype]]: Object
+    console.log('copy的對象',  copy.hasOwnProperty('z')) // false
+    console.log('typeof',  typeof copy.toString) // function
+
+    // 方法3： Object.create() =============
+    const second = Object.create({x:1})
+    console.log('second',second) // {}
+    // [[Prototype]]: Object
+    // x: 1
+    Object.preventExtensions(second)
+    second.s = 23;
+    console.log('second typeof',typeof second.toString) // function
+    console.log('second hasOwnProperty', second.hasOwnProperty('x')) // false
+    console.log('second preventExtensions', second.s) // undefined
+    console.log('second isExtensible', Object.isExtensible(second)) // false
+    console.log('second getOwnPropertyDescriptor', Object.getOwnPropertyDescriptor(second, 's')) // undefined
+
+
+    // 語法：Object.getOwnPropertyDescriptor(obj, prop) // obj: 需要查找的目標對象， prop: 目標對象屬性名稱
+    // Object.getOwnPropertyDescriptor() 方法返回指定對象上一個自有屬性對應的屬性描述符
+    // （自有屬性是指直接賦予該對象的屬性，不需要從原型鏈上進行查找的屬性）
+    const obj2 = {x: 1, y: 2};
+    console.log('getOwnDescripter', Object.getOwnPropertyDescriptor(obj2, 'x'))
+    // {value: 1, writable: true, enumerable: true, configurable: true}
+
+    // 語法：Object.isSealed(obj)  判斷一個對象是否被密封，返回布爾值
+    // 密封對象是指那些不可擴展的，且所有自身屬性都不可配置且因此不可刪除（但不一定是不可寫）的對象
+    const empty = {};
+    console.log('空對象', Object.isSealed(empty)) // false
+
+  </script>
+</body>
+</html>

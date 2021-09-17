@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>嚴格模式</title>
+</head>
+<body>
+  <script>
+    !function(a){
+      arguments[0] = 100;
+      console.log('非嚴格模式a受arguments影響：',a)
+    }(1)
+
+    !function(a){
+      'use strict'
+      arguments[0] = 100;
+      console.log('嚴格模式：',a)
+    }(1)
+
+    !function(a){
+      'use strict'
+      arguments[0].x = 100;
+      console.log('嚴格模式下a雖然不受arguments影響，但是修改對象屬性就會受到影響：',a.x)
+    }({x:1})
+
+    // 在严格模式中禁止八进制字面量。
+    !function(a){
+      console.log('非嚴格',0123)
+    }()
+    // !function(a){
+    //   'use strict'
+    //   console.log('嚴格',0123) // Octal literals are not allowed in strict mode.
+    // }()
+
+    // 嚴格模式下不允許delete 參數
+    !function(a){
+      console.log('非嚴格下delete',delete a)
+    }(1)
+    // !function(a){
+    //   'use strict'
+    //   delete a;
+    // }(1)
+
+    // 嚴格模式下不可delete配置屬性
+    !function(a){
+      var obj = {};
+      Object.defineProperty(obj, 'a',{
+        configurable: false
+      });
+      console.log('非嚴格模式delete不可配置的屬性：', delete obj.a)
+    }(1)
+    !function(a){
+      'use strict'
+      var obj = {};
+      Object.defineProperty(obj, 'a',{
+        configurable: false
+      });
+      console.log('非嚴格模式delete不可配置的屬性：', delete obj.a) // Cannot delete property 'a'
+    }(1)
+
+
+  </script>
+</body>
+</html>

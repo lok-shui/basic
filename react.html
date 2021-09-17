@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react</title>
+  <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+  <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="example"></div>
+  <div id="example2"></div>
+  <script type="text/babel">
+   
+    class MyTime extends React.Component{
+      constructor(props){
+        super(props)
+        this.myRef = React.createRef()
+      }
+      handleClick(){
+        this.myRef.current.focus();
+      }
+      render(){
+        return (
+          <div>
+            <input type="text" ref={this.myRef} />
+            <input type="button" value="点击获取焦点" onClick={this.handleClick.bind(this)} />
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(
+      <MyTime />,
+      document.getElementById('example')
+    )
+  
+     
+  </script>
+</body>
+</html>

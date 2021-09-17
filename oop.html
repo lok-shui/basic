@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 构造函数
+        function Persion(name, age){
+            this.name = name,
+            this.age = age
+        }
+        // 用原型模式创建方法
+        // Persion.prototype.say = function(){
+        //     console.log('原型方法',this.name)
+        // }
+        Object.defineProperty(Persion.prototype, "constructor", {
+            enumerable: false,
+            value: Persion
+        });
+
+         // 更简单的原型方法： 一个包含所有属性和方法的对象字面量
+         // 缺点：使用原型链实现继承时，不能使用对象字面量创建原型方法。因为这样做就会重写原型链
+        Persion.prototype = {
+            // 这里务必要重新将构造函数指回Persion构造函数，否则会指向这个新创建的对象
+            constructor: Persion,
+            say: function(){
+                console.log('更简单的原型方法', this.name)
+            }
+        }
+        // const newp = new Persion('名字','年龄');
+        // const second = new Persion('第二个名字','第二个年龄')
+        // console.log('输出', newp instanceof Object) // true
+        // console.log('输出', newp instanceof Persion) // true
+        // console.log(newp.say()===second.say()) // true
+        // console.log('布爾值',newp.__proto__=== Object.getPrototypeOf(newp))
+
+        function Father(){
+            this.fatherValue = '父级';
+        }
+
+        Father.prototype.getFatherValue = function(){
+            console.log('父级的值', this.fatherValue)
+        }
+
+        function Child(){
+            this.childValue = '子级';
+        }
+        // 实现继承：继承自Father
+        Child.prototype = new Father();
+        Child.prototype.getChildValue = function(){
+            console.log('子项的值',this.childValue)
+        }
+
+        const instance = new Child();
+        instance.getFatherValue();// 父级的值 父级
+        instance.getChildValue();// 子项的值 子级
+
+    </script>
+</body>
+</html>

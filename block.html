@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>塊block</title>
+</head>
+<body>
+  <script>
+    // 沒有塊級作用域
+    var i = 0;
+    for(; i<2; i++){
+      var str = 'str';
+      console.log(str)
+    }
+
+    function fun(){
+      var a=b=0;
+    }
+    fun()
+    console.log(typeof b) // number
+    console.log(typeof a) // undefined
+
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原型鏈</title>
+</head>
+<body>
+    <script>
+        // 第一種方式：對象字面量
+        const o1 = {name:'a1'};
+        const o2 = new Object({name:"f1"})
+        // 第二種方式：Object.create
+        const p = {name:'p1'}
+        const b1 = Object.create(p);
+        // 第三種方式：通過構造函數
+        const f1 = function(name){
+            this.name = name;
+        }
+        f1.prototype.say = function(){
+            console.log('c1 prototype')
+        }
+        const f2 = new f1('d1')
+
+        console.log(f1.prototype===f2.__proto__)
+        console.log(f1.prototype.constructor === f1)
+        console.log(f1.__proto__===Function.prototype)
+        console.log(f2.__proto__===f1.prototype)
+        // 都輸出: true
+
+        var a = 20;
+        var foo = {
+            a: 10,
+            getA: function(){
+                return this.a;
+            }
+        }
+        console.log('第一个输出：', foo.getA())
+        var test1 = foo.getA;
+        console.log('输出test1',test1())
+        const aa = 20;
+        const fooa = {
+            aa: 10,
+            getAa: ()=>{
+                return this.aa;
+            }
+        }
+        console.log('第2个输出：', fooa.getAa())
+    </script>
+</body>
+</html>

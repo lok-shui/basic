@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写双向绑定</title>
+    
+</head>
+<style>
+    #app {
+        text-align: center;
+    }
+</style>
+<body>
+    <!-- <div id="app">
+        <form >
+            <input type="text" v-model="number">
+            <button type="button" v-click="increment">增加</button>
+        </form>
+        <h3 v-bind="number"></h3>
+    </div> -->
+    <div></div>
+    <input type="text">
+    
+</body>
+<script>
+    let obj = {}
+    function watch(obj, name, callback){
+        let value = obj.name;
+        Object.defineProperty(obj, name, {
+            set(msg){
+                value = msg;
+                callback(value)
+            },
+            get(){
+                return value
+            }
+        })
+    }
+    function doSomething(value){
+        document.querySelector("div").innerHTML = value;
+        document.querySelector('input').value = value;
+    }
+    document.querySelector('input').addEventListener('input',(e) =>{
+        obj['msg'] = e.target.value
+    })
+    watch(obj,'msg',doSomething)
+
+
+
+    // let obj = {};
+    // Object.defineProperty(obj,"name",{
+    //     value:"天海",
+    //     writable: false,
+    //     enumerable: false,
+    //     configurable:true
+    // })
+    // obj.name="凰稀要";
+    // delete obj.name
+    // console.log('obj',obj.name)
+    // for(let a in obj){
+    //     console.log('是否枚举', a)
+    // }
+
+    // let obj2 = {
+    //     name: "希望夫妇"
+    // }
+    // Object.defineProperty(obj2,"name",{
+    //     get: function(){
+    //         console.log('get value')
+           
+    //     },
+    //     set: function(newValue){
+    //         console.log('设置新值', newValue)
+    //     }
+    // })
+    // obj2.name
+    // obj2.name ="重新设置了get"
+    
+
+
+    // function myVue(options){
+    //     this._init(options)
+    // }
+    // myVue.prototype._init = function(options){
+    //     this.$options = options;
+    //     this.$el = document.querySelectorAll(options.el);
+    //     this.$data = options.data;
+    //     this.$methods = options.methods;
+
+    //     this._binding = {};
+    //     this._observer(this.$data);
+    //     this.compile(this.$el)
+    // }
+    // myVue.prototype._observer = function(obj){
+    //     var value;
+    //     for(key in obj){
+    //         if(obj.hasOwnProperty(key)){
+    //             this._binding[key] = {
+    //                 _directives: []
+    //             };
+    //             value = obj[key]
+    //         }
+    //     }
+
+    // }
+    // myVue.prototype._compile = function(){
+
+    // }
+   
+</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>性能測試</title>
+</head>
+
+<body>
+  <script>
+    // console.time方法是开始计算时间，console.timeEnd是停止计时，输出脚本执行的时间。
+    // 結論：for > forEach > for of > for in
+
+    // forEach
+    const array1 = Object.keys(Array.from({ length: 10000000 }))
+    console.time();
+    array1.forEach(element => {
+
+    });
+    console.timeEnd();
+
+    // for in
+    const array2 = Object.keys(Array.from({ length: 10000000 }))
+    console.time();
+    for (const key in array2) {
+      const item = array2[key];
+    }
+    console.timeEnd();
+
+    // for of
+    const array3 = Object.keys(Array.from({ length: 10000000 }))
+    console.time();
+    for (const item of array3) {
+
+    }
+    console.timeEnd();
+
+    // for
+    const array4 = Object.keys(Array.from({ length: 10000000 }))
+    console.time();
+    for (let i = 0; i < array4.length; i++) {
+      const element = array4[i];
+    }
+    console.timeEnd();
+
+  </script>
+</body>
+
+</html>

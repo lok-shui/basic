@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tryCatch</title>
+</head>
+
+<body>
+  <script>
+    // 1:
+    try {
+      throw 'test'
+    } catch (ex) {
+      console.log(ex)
+    } finally {
+      console.log('finally 1')
+    }
+    // 2:
+    try {
+
+    } finally {
+      console.log('finally 2')
+    }
+    // 3:
+    try {
+      try {
+        throw new Error("oops")
+      } finally {
+        console.log('finally 3')
+      }
+    } catch (ex) {
+      console.error('3outer', ex.message)
+    }
+    // 4
+    try {
+      try {
+        throw new Error('opps4')
+      } catch (error) {
+        console.error('4inner', error.message)
+      } finally {
+        console.log('4finally')
+      }
+    } catch (ex) {
+      console.error('4outer' + ex.message)
+    }
+  </script>
+</body>
+
+</html>

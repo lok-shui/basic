@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var name = '颜王', age = 17;
+        var obj = {
+            name: '招生办主任',
+            objAge: this.age,
+            myFun: function(fans){
+                document.write(this.name+'的年龄'+this.age, '，喜欢她的后辈有：'+fans+'<br>')
+            }
+        }
+        var db = {
+            name: '天海',
+            age: 40
+        }
+        obj.objAge;
+        obj.myFun('top桑');
+        obj.myFun.call(db,'钻钻，颜王，神木，七海，辽河...');
+        obj.myFun.apply(db,['钻钻，颜王，神木，七海，辽河...']);
+        obj.myFun.bind(db,'钻钻，颜王，神木，七海，辽河...')();
+
+
+
+        var fav = '凰稀要';
+        function shows(){
+            document.write(this.fav)
+        }
+        shows();
+
+    </script>
+    
+</body>
+</html>

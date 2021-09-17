@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面向对象</title>
+</head>
+<body>
+    <ul class="list">
+        <li>%%%%%%% 第一行<span class="del">X</span></li>
+        <li>%%%%%%% 第二行<span class="del">X</span></li>
+        <li>%%%%%%% 第三行<span class="del">X</span></li>
+        <li>%%%%%%% 第四行<span class="del">X</span></li>
+        <li>%%%%%%% 第五行<span class="del">X</span></li>
+    </ul>
+    <ul class="list">
+        <li>%%%%%%% 第一行<span class="del">X</span></li>
+        <li>%%%%%%% 第二行<span class="del">X</span></li>
+        <li>%%%%%%% 第三行<span class="del">X</span></li>
+        <li>%%%%%%% 第四行<span class="del">X</span></li>
+        <li>%%%%%%% 第五行<span class="del">X</span></li>
+    </ul>
+
+    <script type="text/javascript">
+        class List {
+            constructor(set){
+                
+                this.el = Array.from(document.querySelectorAll(set));
+                
+                console.log('this el',this.el)
+                let self = this;
+                this.el.forEach(item =>{
+                    item.addEventListener('click',function(e){
+                        if(e.target.className.indexOf('del') > -1){
+                            self.removeItem.call(self, e.target);
+                        }
+                    })
+                })
+            }
+            removeItem(target){
+                let self = this;
+                let findParent = function(node){
+                    let parent = node.parentNode;
+                    let root = self.el.find(item => item === parent);
+                   
+                    console.log('self.el:',self.el)
+                    if(root){
+                        root.removeChild(node);
+                    }else {
+                        findParent(parent)
+                    }
+                }
+                findParent(target);
+            }
+        }
+        window.addEventListener('DOMContentLoaded', function(){
+            new List('.list')
+        })
+        // onload当页面载入完毕后执行Javascript代码
+        // DOMCOntentLoaded事件指文档加载完成触发的事件，即dom加载完成，不用考虑其他资源，例如图片例
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Foo(){
+            getName = function(){
+                document.write(1+'<br>')
+            };
+            return this;
+        }
+        Foo.getName = function(){
+            document.write(2+'<br>')
+        }
+        Foo.prototype.getName = function(){
+            document.write(3+'<br>')
+        }
+        var getName = function(){
+            document.write(4+'<br>')
+        }
+        function getName(){
+            document.write(5+'<br>')
+        }
+
+        Foo.getName();//2
+        getName();//4
+        Foo().getName();//1
+        getName(); // 1
+        new Foo.getName();//2
+        new Foo().getName();//3
+        new new Foo().getName();//3
+    </script>
+</body>
+</html>
