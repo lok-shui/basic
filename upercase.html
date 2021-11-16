@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>利用回调函数将数组对象的key进行大小写转换或key替换</title>
+</head>
+<body>
+    <script>
+      // 把treeData的所有键转为小写
+      let treeData=[
+        {
+          Title:'demo1',
+          Ky:'1',
+          Children:[
+            {
+              Title:'demo2',
+              Ky:'2-2',
+              Children:[
+                {
+                  Title:'demo31',
+                  Ky:'3-3'
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      // 键值对都转为小写
+      const array = [
+        {
+          FIRST: '中文',
+          SECOND: 'ENG'
+        }
+      ]
+      function all(item){
+        for(let a in item){
+          item[a].SECOND = item[a].SECOND.toLowerCase()
+        }
+        for(let i=0;i<item.length;i++){
+          for(let key in item[i]) {
+            item[i][key.toLowerCase()] = item[i][key]
+            delete (item[i][key])
+          }
+          if(item[i].children && item[i].children.length) {
+            change(item[i].children);
+          }
+        }
+        
+        return item
+      }
+      const lower1 =  all(array)
+      console.log('key', lower1)
+
+       
+
+      // 方法1  
+      function change(item){
+        for(let i=0;i<item.length;i++){
+          for(let key in item[i]) {
+            item[i][key.toLowerCase()] = item[i][key]
+            delete (item[i][key])
+          }
+          if(item[i].children && item[i].children.length) {
+            change(item[i].children);
+          }
+        }
+        return item
+      }
+      // 方法2
+      function change2(data){
+        for(let item in data) {
+          Object.keys(data[item]).forEach(element => {
+            data[item][element.toLowerCase()] = data[item][element];
+            delete (data[item][element])
+          });
+          if(data[item].children && data[item].children.length) {
+            change(data[item].children);
+          }
+        }
+        return data
+      }
+      const lower = change(treeData)
+      // console.log('小写', lower)
+      // 输出结果为：
+      // [
+      //   {
+      //     title:'demo1',
+      //     ky:'1',
+      //     children:[
+      //       {
+      //         title:'demo2',
+      //         ky:'2-2',
+      //         children:[
+      //           {
+      //             title:'demo31',
+      //             ky:'3-3'
+      //           }
+      //         ]
+      //       }
+      //     ]
+      //   }
+      // ]
+
+    </script>
+</body>
+</html>

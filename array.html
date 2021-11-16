@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <menuId>Document</menuId>
+</head>
+<body>
+    <script>
+      let tree =[
+        {id: '1',
+          menuId: '节点1',
+          items: [
+            {
+              id: '1-1',
+              menuId: '节点1-1',
+              items: [
+                {
+                  id: '1-1-1',
+                  menuId: '节点1-1-1'
+                },
+              ]
+            },
+            {
+              id: '1-2',
+              menuId: '节点1-2'
+            }
+          ]
+        },
+        {
+            id: '2',
+            menuId: '节点2',
+            items: [
+              {
+                id: '2-1',
+                menuId: '节点2-1'
+              }
+            ]
+          }
+      ]
+
+      function getTree(ary) {
+        return ary.map(v => {
+          const item = {
+            addNew: v.menuId,  //这是创建的新对象 根据需要的键随意更改
+          };
+          if (v.items) item.items = getTree(v.items);
+          return item;
+        });
+      }
+
+      const newTree = getTree(tree);
+    console.log(newTree)
+     
+    </script>
+</body>
+</html>
