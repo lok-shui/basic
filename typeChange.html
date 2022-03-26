@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 網址：https://www.jianshu.com/p/fddce13bd32c
+    // js類型轉換：隱式轉換
+    console.log("52" + "0"); //输出："520"
+    console.log("52" + 0); //输出："520"
+    console.log(52 + 0); //输出：52
+    //某个操作数是字符串的情况
+    console.log("" + 1); //输出："1"
+    console.log("" + true); //输出："true"
+    console.log("" + "love"); //输出："love"
+    console.log("" + null); //输出："null"
+    console.log("" + undefined); //输出："undefined"
+    console.log("" + [3, 4]); //输出："3,4"
+    //操作数能够转换为字符串的情况
+    console.log([1, 2] + 1); //输出："1,21"
+    console.log([1, 2] + true); //输出："1,2true"
+    console.log([1, 2] + "love"); //输出："1,2love"
+    console.log([1, 2] + null); //输出："1,2null"
+    console.log([1, 2] + undefined); //输出："1,2undefined"
+    console.log([1, 2] + [3, 4]); //输出："1,23,4"
+
+    // 注意：隐式转换会对操作数首先调用 valueOf() 方法，
+    // 然后通过 toString() 方法将返回值转换为字符串，
+    // 而使用 String() 方法则是直接调用 ToString()
+    var o = {
+      valueOf: function () {
+        return 11;
+      },
+      toString: function () {
+        return 22;
+      }
+    };
+    console.log(o + ""); //输出："11"
+    console.log(String(o)); //输出："22"
+
+    console.log(+true); //输出：1
+    console.log(+10); //输出：10
+    console.log(+null); //输出：0
+    console.log(+undefined); //输出：NaN
+    console.log(+"123"); //输出：123
+    console.log(+"01"); //输出：1
+    console.log(+"1.1"); //输出：1.1
+    console.log(+""); //输出：0
+    console.log(+"love"); //输出：NaN
+    console.log(+{
+      name: "Tom"
+    }); //输出：NaN
+    console.log(+[1, 2]); //输出：NaN
+    console.log(+[999]); //输出：999 
+    console.log(+new Date); //以微秒为单位的数字时间 (時間戳)
+
+    // 减号运算符( - )和加号运算符作用一样，并且它还会反转数字的正负号。
+    console.log(-true); //输出：-1
+    console.log(-10); //输出：-10
+    console.log(-null); //输出：-0
+    console.log(-undefined); //输出：NaN
+    console.log(-"123"); //输出：-123
+    console.log(-"01"); //输出：-1
+    console.log(-"1.1"); //输出：-1.1
+    console.log(-""); //输出：-0
+    console.log(-"love"); //输出：NaN
+    console.log(-{
+      name: "Tom"
+    }); //输出：NaN
+    console.log(-[1, 2]); //输出：NaN
+    console.log(-[999]); //输出：-999
+    console.log(-new Date); //以微秒为单位的数字时间
+
+  </script>
+</body>
+
+</html>

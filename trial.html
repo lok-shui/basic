@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 網址：https://www.cnblogs.com/tzz-ing/p/5072973.html -->
+  <!-- 
+    hasOwnProperty：是用来判断一个对象是否有你给出名称的属性或对象。
+    不过需要注意的是，此方法无法检查该对象的原型链中是否具有该属性，
+    该属性必须是对象本身的一个成员。
+    實踐：可以在form表單裏設置某一個item是否展示
+   -->
+  <!-- isPrototypeOf: 检测一个对象是否是另一个对象的原型。或者说一个对象是否被包含在另一个对象的原型链中 -->
+  <script>
+    function person(nickName, siteName) {
+      this.nickName = nickName;
+      this.siteName;
+      this.address = '上海';
+    }
+    person.prototype.showAdmin = () => {
+      console.log(`${this.nickName}是${this.siteName}的站长`)
+    };
+
+    person.prototype.showSite = (siteUrl) => {
+      // 在原型链上加一个私有的属性
+      this.siteUrl = siteUrl;
+      // 在原型链上加一个私有方法
+      this.sayAge = () => {
+        console.log('age is 20')
+      }
+      return `${this.siteName}的地址是${this.siteUrl}`
+    }
+    person.prototype.job = 'code';
+    person.prototype.fans = '朝海光';
+
+    let p1 = new person("脚本之家1", "WEB前端开发");
+    let p2 = new person("脚本之家2", "WEB前端开发");
+    p1.age1 = "30";
+    p1.age2;
+
+
+    console.log('0: ' + p1.hasOwnProperty("nickName"));//true  //能够检测构造函数 模板函数里的属性和方法且该属性被赋值了 所以是true
+    console.log('1: ' + p1.hasOwnProperty("siteName"));//false //能够检测构造函数 模板函数里的属性和方法但是该属性没有被赋值，所以是false
+    console.log('2: ' + p1.hasOwnProperty("address"));//true   //能够检测构造函数 模板函数里的属性和方法且被赋值，所以是true
+    console.log('3: ' + p1.hasOwnProperty("age1"));//true      //能够检测p1上的属性且该属性被赋值了，所以是true
+    console.log('4: ' + p1.hasOwnProperty("age2"));//false     //能够检测p1上的属性但是该属性没被赋值了，所以是false
+
+    console.log('5: ' + p1.hasOwnProperty("showAdmin"));//false  //hasOwnProperty是不可以检测到原型链上的属性和方法
+    console.log('6: ' + p1.hasOwnProperty("showSite"));//false   //hasOwnProperty是不可以检测到原型链上的属性和方法
+    console.log('7: ' + p1.hasOwnProperty("job"));//false        //hasOwnProperty是不可以检测到原型链上的属性和方法
+
+    console.log('8: ' + person.prototype.hasOwnProperty("showAdmin"));//true  //person.prototype上检测是否有showAdmin 
+    console.log('9: ' + person.prototype.hasOwnProperty("job"));//true        //person.prototype上检测是否有job
+    console.log('10: ' + person.prototype.hasOwnProperty("siteUrl"));//false  //person.prototype上没有siteUrl
+    console.log('11: ' + person.prototype.hasOwnProperty("sayAge"));//false   //person.prototype上没有siteUrl
+
+    console.log('12: ' + person.prototype.isPrototypeOf(p1))//true
+    console.log('13: ' + person.prototype.isPrototypeOf(p2))//true
+
+
+  </script>
+</body>
+
+</html>

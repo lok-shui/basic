@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,20 +10,21 @@
   <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
   <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
 </head>
+
 <body>
   <div id="example"></div>
   <div id="example2"></div>
   <script type="text/babel">
-   
-    class MyTime extends React.Component{
-      constructor(props){
+
+    class MyTime extends React.Component {
+      constructor(props) {
         super(props)
         this.myRef = React.createRef()
       }
-      handleClick(){
+      handleClick() {
         this.myRef.current.focus();
       }
-      render(){
+      render() {
         return (
           <div>
             <input type="text" ref={this.myRef} />
@@ -35,8 +37,9 @@
       <MyTime />,
       document.getElementById('example')
     )
-  
-     
+
+
   </script>
 </body>
+
 </html>

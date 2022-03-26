@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 参考网址：
+    https://mp.weixin.qq.com/s?src=11&timestamp=1642575771&ver=3567&signature=fYZLXvF-kmuq3ho9NVzV0qIqxGOlC46Yk09-WWYrjmsafxxKLIqPcbP0cBU6ryNGF1ouu*AoGN2RsipH9rbCA7Rlg9K5*yvIIjIkMmn*ZyXd6LBZd1x39TL*djtDlbwa&new=1 
+  -->
+  <!-- 语法：setTimeout(function[, delay, arg1, arg2, ...]); -->
+  <!-- 
+  function：function 是你想要在到期时间(delay 毫秒)之后执行的函数。
+  code：这是一个可选语法，你可以使用字符串而不是 function ，在 delay 毫秒之后编译和执行字符串 (使用该语法是不推荐的)。
+  delay(可选)：延迟的毫秒数 (一秒等于 1000 毫秒)，函数的调用会在该延迟之后发生。如果省略该参数，delay 取默认值 0，意味着“马上”执行，或者尽快执行。不管是哪种情况，实际的延迟时间可能会比期待的(delay 毫秒数)
+  值长。
+  arg1, ..., argN(可选)：附加参数，一旦定时器到期，它们会作为参数传递给。
+  我们可以知道定时器启动的时候，第三个及以后的参数会作为第一个 func()的参数传进去。 
+  -->
+  <script>
+    for (var i =0; i < 4; i++) {
+      (function(j) {
+        setTimeout(() =>{
+          console.log(j)
+        }, 1000)
+      })(i)
+    }
+  </script>
+</body>
+
+</html>

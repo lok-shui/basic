@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function person(nickName, siteName) {
+      this.nickName = nickName;
+      this.siteName;
+      this.address = '上海';
+    }
+    person.prototype.showAdmin = function () {
+      console.log(this.nickName + "是" + this.siteName + "的站长!")
+    };
+
+    person.prototype.showSite = function (siteUrl) {
+      this.siteUrl = siteUrl;       // 在原型上加一个私有的属性
+      this.sayAge = function () {   // 在原型上加一个私有的方法
+        console.log('20岁');
+      }
+      return this.siteName + "的地址是" + this.siteUrl;
+    };
+
+    person.prototype.job = 'code';
+
+    var p1 = new person("脚本之家1", "WEB前端开发");
+    var p2 = new person("脚本之家2", "WEB前端开发");
+    p1.age1 = "30";
+    p1.age2;
+
+
+    console.log(p1.hasOwnProperty("nickName"));//true      //能够检测构造函数 模板函数里的属性和方法且该属性被赋值了 所以是true
+    console.log(p1.hasOwnProperty("siteName"));//false      //能够检测构造函数 模板函数里的属性和方法但是该属性没有被赋值，所以是false
+    console.log(p1.hasOwnProperty("address"));//true      //能够检测构造函数 模板函数里的属性和方法且被赋值，所以是true
+    console.log(p1.hasOwnProperty("age1"));//true       //能够检测p1上的属性且该属性被赋值了，所以是true
+    console.log(p1.hasOwnProperty("age2"));//false       //能够检测p1上的属性但是该属性没被赋值了，所以是false
+    console.log("===============");
+
+    console.log(p1.hasOwnProperty("showAdmin"));//false   //hasOwnProperty是不可以检测到原型链上的属性和方法
+    console.log(p1.hasOwnProperty("showSite"));//false    //hasOwnProperty是不可以检测到原型链上的属性和方法
+    console.log(p1.hasOwnProperty("job"));//false          //hasOwnProperty是不可以检测到原型链上的属性和方法
+    console.log("===============");
+
+    console.log(person.prototype.hasOwnProperty("showAdmin"));//true    //person.prototype上检测是否有showAdmin  弹出true
+    console.log(person.prototype.hasOwnProperty("job"));//true     //person.prototype上检测是否有job   弹出true
+    console.log(person.prototype.hasOwnProperty("siteUrl"));//false   //person.prototype上没有siteUrl   弹出false
+    console.log(person.prototype.hasOwnProperty("sayAge"));//false   //person.prototype上没有siteUrl   弹出false
+    console.log("===============");
+
+    console.log(person.prototype.isPrototypeOf(p1))//true
+    console.log(person.prototype.isPrototypeOf(p2))//true
+
+
+  </script>
+</body>
+
+</html>

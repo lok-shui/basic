@@ -10,14 +10,15 @@
 
 <body>
   <script>
-    var proxy = new Proxy({}, {
-      get: function (target, propKey) {
-        return 35
-      }
-    })
-    console.log(proxy.time)
-    console.log(proxy.name)
-    console.log(proxy.age)
+    function timeout(ms) {
+      return new Promise((resolve, reject) => {
+        setTimeout(resolve, ms, 'done');
+      });
+    }
+
+    timeout(100).then((value) => {
+      console.log(value);
+    });
   </script>
 </body>
 

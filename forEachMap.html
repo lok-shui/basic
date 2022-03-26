@@ -1,72 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-    <script>
-      // forEach和map的区别
+  <script>
+    // forEach和map的区别
 
-      // 1: 这两种方法都不能用 break 中断，否则会引发异常：
-      const numbers = [1, 2, 3, 4, 5];
-      // const squareUsingForEach = [];
-      // numbers.forEach(x => { 
-      //   if(x == 3) break; // <- Uncaught SyntaxError: Illegal break statement : 非法break语句
-      //   squareUsingForEach.push(x*x);
-      // });
+    // 1: 这两种方法都不能用 break 中断，否则会引发异常：
+    const numbers = [1, 2, 3, 4, 5];
+    // const squareUsingForEach = [];
+    // numbers.forEach(x => { 
+    //   if(x == 3) break; // <- Uncaught SyntaxError: Illegal break statement : 非法break语句
+    //   squareUsingForEach.push(x*x);
+    // });
 
-      // const squareUsingMap = numbers.map(x => {
-      //   if(x == 3) break; // <- Uncaught SyntaxError: Illegal break statement 
-      //   return x*x;
-      // });
+    // const squareUsingMap = numbers.map(x => {
+    //   if(x == 3) break; // <- Uncaught SyntaxError: Illegal break statement 
+    //   return x*x;
+    // });
 
-      // 如果需要中断遍历，则应使用简单的for循环或for-of/for-in循环。
-      const squareUsingFor = [];
-      for(x of numbers){
-        if(x == 3) break;
-        squareUsingFor.push(x); //  [1, 2]
-      };
+    // 如果需要中断遍历，则应使用简单的for循环或for-of/for-in循环。
+    const squareUsingFor = [];
+    for (x of numbers) {
+      if (x == 3) break;
+      squareUsingFor.push(x); //  [1, 2]
+    };
 
-      // numbers.every((item) =>{
-      //   squareUsingFor.push(item)
-      //   return item!==3; // [1, 2, 3]
-      // })
-      console.log(squareUsingFor);  
+    // numbers.every((item) =>{
+    //   squareUsingFor.push(item)
+    //   return item!==3; // [1, 2, 3]
+    // })
+    console.log(squareUsingFor);
 
-      // =================================================================
+    // =================================================================
 
-      // 2: forEach()方法返回undefined ，而map()返回一个包含已转换元素的新数组。
-      const arr = [1, 2, 3, 4, 5];
-      // 使用 forEach()
-      const forEachArr = [];
-      arr.forEach(x => forEachArr.push(x*x));
-      // 使用 map()
-      const mapArr = arr.map(x => x*x);
-      console.log(forEachArr);  
-      console.log(mapArr);
-      // 由于forEach()返回undefined，所以我们需要传递一个空数组来创建一个新的转换后的数组。
-      // map()方法不存在这样的问题，它直接返回新的转换后的数组。在这种情况下，建议使用map()方法。
+    // 2: forEach()方法返回undefined ，而map()返回一个包含已转换元素的新数组。
+    const arr = [1, 2, 3, 4, 5];
+    // 使用 forEach()
+    const forEachArr = [];
+    arr.forEach(x => forEachArr.push(x * x));
+    // 使用 map()
+    const mapArr = arr.map(x => x * x);
+    console.log(forEachArr);
+    console.log(mapArr);
+    // 由于forEach()返回undefined，所以我们需要传递一个空数组来创建一个新的转换后的数组。
+    // map()方法不存在这样的问题，它直接返回新的转换后的数组。在这种情况下，建议使用map()方法。
 
-      // =================================================================
-      
-      // 3: map()方法输出可以与其他方法(如reduce()、sort()、filter())链接在一起，以便在一条语句中执行多个操作。
-      // 另一方面，forEach()是一个终端方法，这意味着它不能与其他方法链接，因为它返回undefined。
-      const chainArr = [1, 2, 3, 4, 5];
-      // 使用 forEach()
-      const newForEach = []
-      let sumIndex = 0;
-      chainArr.forEach(x => newForEach.push(x*x));
-      newForEach.forEach(square => sumIndex += square);
+    // =================================================================
 
-      // 使用 map()
-      const sumMap = chainArr.map(x => x*x).reduce((total, value) => total + value);
+    // 3: map()方法输出可以与其他方法(如reduce()、sort()、filter())链接在一起，以便在一条语句中执行多个操作。
+    // 另一方面，forEach()是一个终端方法，这意味着它不能与其他方法链接，因为它返回undefined。
+    const chainArr = [1, 2, 3, 4, 5];
+    // 使用 forEach()
+    const newForEach = []
+    let sumIndex = 0;
+    chainArr.forEach(x => newForEach.push(x * x));
+    newForEach.forEach(square => sumIndex += square);
 
-      console.log(sumIndex); // 55
-      console.log(sumMap); // 55
+    // 使用 map()
+    const sumMap = chainArr.map(x => x * x).reduce((total, value) => total + value);
+
+    console.log(sumIndex); // 55
+    console.log(sumMap); // 55
       // 当需要多个操作时，使用forEach()方法是一项非常乏味的工作。我们可以在这种情况下使用map()方法。
-    </script>
+  </script>
 </body>
+
 </html>
